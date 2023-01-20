@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/kinopoisk-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:11.1
+    volumes:
+      - ./tmp/postgres:/var/lib/postgresql/data
+    environment:
+      - PSQL_HISTFILE=/root/log/.psql_history
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432
