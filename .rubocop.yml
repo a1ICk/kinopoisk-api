@@ -1,0 +1,76 @@
+require:
+    - rubocop-rails
+    - rubocop-rspec
+    - rubocop-performance
+
+  AllCops:
+    NewCops: enable
+    Exclude:
+      - 'config/**/**'
+      - 'config.ru'
+      - 'lib/tasks/**'
+      - 'Gemfile.lock'
+      - 'tmp/**/*'
+      - 'bin/**'
+      - 'db/schema.rb'
+      - 'db/migrate/**'
+      - 'app/helpers/**'
+      - 'app/channels/**/**'
+      - 'spec/helpers/**'
+      - 'spec/rails_helper.rb'
+      - 'spec/spec_helper.rb'
+      - 'vendor/bundle/**/*'
+
+  Style/FrozenStringLiteralComment:
+    Enabled: false
+
+  Documentation:
+    Enabled: false
+
+  Metrics/BlockLength:
+    Enabled: false
+
+  Metrics/AbcSize:
+    Enabled: false
+
+  Metrics/PerceivedComplexity:
+    Enabled: false
+
+  Metrics/MethodLength:
+    Enabled: false
+
+  RSpec/MultipleMemoizedHelpers:
+    Enabled: false
+
+  Rails/I18nLocaleTexts:
+    Enabled: false
+
+  RSpec/ImplicitExpect:
+    Exclude:
+      - 'spec/models/**'
+
+  Lint/MissingSuper:
+    Exclude:
+      - 'app/services/**/*'
+
+  RSpec/VariableName:
+    IgnoredPatterns:
+      - access-token
+
+  RSpec/EmptyExampleGroup:
+    Exclude:
+      - 'spec/integration/movie_report_spec.rb'
+      - 'spec/integration/person_report_spec.rb'
+
+  Metrics/CyclomaticComplexity:
+    Exclude:
+      - 'app/services/integration/the_movie_db.rb'
+      - 'app/controllers/api/v1/movies_controller.rb'
+
+  Metrics/ClassLength:
+    Exclude:
+      - 'app/services/integration/the_movie_db.rb'
+
+  Bundler/DuplicatedGem:
+    Exclude:
+      - 'Gemfile'
