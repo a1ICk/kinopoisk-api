@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_195514) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_23_135429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actors", force: :cascade do |t|
+    t.string "name"
+    t.integer "count_of_films"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_actors_on_team_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.integer "release_date"
@@ -21,6 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_195514) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "producers", force: :cascade do |t|
+    t.string "name"
+    t.integer "experience"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_producers_on_team_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -32,5 +50,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_195514) do
     t.index ["movie_id"], name: "index_ratings_on_movie_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.bigint "producer_id"
+    t.bigint "actor_id"
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_teams_on_movie_id"
+  end
+
+  add_foreign_key "actors", "teams"
+  add_foreign_key "producers", "teams"
   add_foreign_key "ratings", "movies"
+  add_foreign_key "teams", "movies"
 end
