@@ -3,4 +3,6 @@
 Rails.application.routes.draw do
   resources :movies
   resources :actors
+  resources :producers
+  resources :ratings
 end

@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all
-
-    render json: @movies, include: [:rating, :team => {:include => :actor}]
+    render json: @movies, :include => [
+      :team => {
+        :include => [
+          :producer,
+          :actor
+        ]
+      }
+    ]
   end
 end
