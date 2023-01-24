@@ -2,7 +2,6 @@
 
 require 'faker'
 
-puts "Sup"
 Movie.destroy_all
 Actor.destroy_all
 Team.destroy_all
