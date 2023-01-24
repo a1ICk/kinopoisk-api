@@ -5,8 +5,9 @@ require 'faker'
 Movie.destroy_all
 Actor.destroy_all
 Team.destroy_all
+Rating.destroy_all
 
-10.times do 
+10.times do
   movie = Movie.create(
     release_date:Faker::Number.between(from: 1902, to: 2023),
     genre:Faker::Book.genre,
@@ -15,6 +16,12 @@ Team.destroy_all
   )
 
   team = Team.create(
+    movie: Movie.find(movie.id)
+  )
+  
+  rating = Rating.create(
+    kp: Faker::Number.between(from: 1, to: 10),
+    imdb: Faker::Number.between(from: 1, to: 10),
     movie: Movie.find(movie.id)
   )
 
