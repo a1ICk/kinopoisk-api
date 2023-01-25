@@ -28,16 +28,16 @@ Producer.destroy_all
 
   5.times do
     actor = Actor.create(
-    name:  Faker::Name.name,
-    count_of_films: Faker::Number.between(from: 1, to: 50),
-    team: Team.find(team.id)
-  )
+      name: Faker::Name.name,
+      count_of_films: Faker::Number.between(from: 1, to: 50),
+      team: Team.find(team.id)
+    )
   end
 
   2.times do
     producer = Producer.create(
       name: Faker::Name.name,
-      experience: Faker::Number.between(from:1, to: 40),
+      experience: Faker::Number.between(from: 1, to: 40),
       team: Team.find(team.id)
     )
   end

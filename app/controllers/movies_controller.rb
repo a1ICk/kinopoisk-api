@@ -1,34 +1,23 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all
-    render json: @movies, :include => [
+    @movies = if request.original_url.split('movies').length != 1
+                if request.original_url.include?('rating.kp') or request.original_url.include?('rating.imdb')
+                  Movie.rating_scope(params['field'].split('.')[1], params['search'])
+                else
+                  Movie.movie_scope(params['field'], params['search'])
+                end
+              else
+                Movie.all
+              end
+    render json: @movies, include: [
       :rating,
-      :team => {
-        :include => [
-          :producer,
-          :actor
+      { team: {
+        include: %i[
+          producer
+          actor
         ]
-      }
+      } }
     ]
   end
-  def show
-    @movie = Movie.find_by(genre: params[:genre])
-    render json: @movie
-  end
-
-
-  # def show
-    # @movies = Movie.all
-    # @movies.kp(@movies.find(params[:id]).id)
-    # res = []
-    # @movies.each do |movie|
-      # if movie.rating.kp == 5
-        # res << movie
-        # p movie.rating.kp
-        # p movie.rating.imdb
-      # end
-   # end
-    # render json: res
-  # end
-
 end
