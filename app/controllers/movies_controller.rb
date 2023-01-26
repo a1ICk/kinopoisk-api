@@ -6,17 +6,21 @@ class MoviesController < ApplicationController
       if url.split('movies').size != 1
         if url.count('&') > 2
           parameters.each do |parameter|
-            if parameter['field'].include?('rating')
-              @movies = @movies.rating_scope(parameter['field'].split('.')[1], parameter['search'])
+            if parameter.key?('sortField')
+              @movies = @movies.movie_order_scope(parameter['sortField'])
             else
-              @movies = @movies.movie_scope(parameter['field'], parameter['search'])
+              if parameter['field'].include?('rating')
+                @movies = @movies.rating_scope(parameter['field'].split('.')[1], parameter['search'])
+              else
+                @movies = @movies.movie_scope(parameter['field'], parameter['search'])
+              end
             end
           end
-        else
-          if url.include?('rating.kp') or url.include?('rating.imdb')
-            @movies = Movie.rating_scope(parameters['field'].split('.')[1], parameters['search'])
+        elsif !url.include?('sort')
+          if url.include?('rating')
+            @movies = @movies.rating_scope(parameters['field'].split('.')[1], parameters['search'])
           else
-            @movies = Movie.movie_scope(parameters['field'], parameters['search'])
+            @movies = @movies.movie_scope(parameters['field'], parameters['search'])
           end
         end
       else
@@ -40,12 +44,14 @@ class MoviesController < ApplicationController
 
     result = []
     i = 0
-    while i < splitted.size
+    while i < splitted.size - 1
       first_field = splitted[i].split('=')[0]
       first_search = splitted[i].split('=')[1]
       second_field = splitted[i + 1].split('=')[0]
       second_search = splitted[i + 1].split('=')[1]
-      result << { first_field => first_search, second_field => second_search }
+      if !first_field.include?('sortField') && !second_field.include?('sortField')
+        result << { first_field => first_search, second_field => second_search }
+      end
       i+=2
     end
     result
