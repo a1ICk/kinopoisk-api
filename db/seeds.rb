@@ -8,7 +8,7 @@ Team.destroy_all
 Rating.destroy_all
 Producer.destroy_all
 
-10.times do
+100.times do
   movie = Movie.create(
     release_date: Faker::Number.between(from: 1902, to: 2023),
     genre: Faker::Book.genre,
