@@ -1,5 +1,30 @@
 class MoviesController < ApplicationController
+  before_action :show_filtered_movies, only: %i[index]
+
   def index
+    render_json_movies(@movies)
+  end
+
+  def show
+    @movie = Movie.find(params[:id])
+    render_json_movies(@movie)
+  end
+
+  private
+
+  def render_json_movies(param)
+    render json: param, include: [
+      :rating,
+      { team: {
+        include: %i[
+          producer
+          actor
+        ]
+      } }
+    ]
+  end
+
+  def show_filtered_movies
     @movies = Movie.all
     url = request.original_url
     parameters = split_url(url)
@@ -32,20 +57,8 @@ class MoviesController < ApplicationController
           @movies = @movies.reverse_order
         end
       end
-
-
-    render json: @movies, include: [
-      :rating,
-      { team: {
-        include: %i[
-          producer
-          actor
-        ]
-      } }
-    ]
   end
 
-  private
   def split_url(url)
     splitted = url.split(/[\/?&]/)[4..]
 
