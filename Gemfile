@@ -5,11 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-gem 'rails', '~> 7.0.4'
-gem 'pg', '~> 1.4', '>= 1.4.5'
-gem 'puma', '~> 5.0'
 gem 'bootsnap', require: false
 gem 'faker'
+gem 'pg', '~> 1.4', '>= 1.4.5'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 7.0.4'
 
 group :development, :test do
   gem 'pry-byebug', platforms: %i[mri mingw x64_mingw]

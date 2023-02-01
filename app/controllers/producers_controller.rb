@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProducersController < ApplicationController
   def index
     @producers = Producer.all
