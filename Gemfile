@@ -11,6 +11,9 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', require: false
 gem 'faker'
 
+gem 'jwt', '~> 2.7'
+gem 'bcrypt', '~> 3.1', '>= 3.1.18'
+
 group :development, :test do
   gem 'pry-byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'

@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :actors
   resources :producers
   resources :ratings
+  resources :users
+  post 'auth/login', to: 'authentication#login'
 end
