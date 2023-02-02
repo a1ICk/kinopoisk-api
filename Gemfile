@@ -17,11 +17,16 @@ group :development, :test do
 
   gem 'rubocop', require: false
 
+  gem 'rspec-rails', ">= 3.9.0"
+
   gem 'rubocop-performance', require: false
 
   gem 'rubocop-rails', require: false
 
   gem 'rubocop-rspec', require: false
+
+  gem 'factory_bot_rails', '~> 6.2'
+
 end
 
 group :development do
