@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :producer do
     name { 'Danila Alckevich' }
     experience { 3 }
-    team_id { team.id }
+    team_id { Team.first }
   end
 end
