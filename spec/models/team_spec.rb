@@ -7,4 +7,7 @@ RSpec.describe Team, type: :model do
     team = FactoryBot.build(:team)
     expect(team.movie_id).to be Movie.first
   end
+  it 'team belongs_to movie' do
+    should belong_to :movie
+  end
 end
