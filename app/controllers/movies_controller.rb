@@ -27,36 +27,8 @@ class MoviesController < ApplicationController
   end
 
   def show_filtered_movies
-    @movies = Movie.all
-    url = request.original_url # re-do: Dima
-    parameters = split_url(url)
-    if url.split('movies').size != 1
-      if url.count('&') > 2
-        parameters.each do |parameter|
-          next if parameter.key?('sortField')
-
-          @movies = if parameter['field'].include?('rating')
-                      @movies.rating_scope(parameter['field'].split('.')[1], parameter['search'])
-                    else
-                      @movies.movie_scope(parameter['field'], parameter['search'])
-                    end
-        end
-      elsif !url.include?('sort')
-        @movies = if url.include?('rating')
-                    @movies.rating_scope(parameters[0]['field'].split('.')[1], parameters[0]['search'])
-                  else
-                    @movies.movie_scope(parameters[0]['field'], parameters[0]['search'])
-                  end
-      end
-    else
-      @movies = Movie.all
-    end
-    return unless url.include?('sortField')
-
-    @movies = @movies.movie_order_scope(parameters[-1]['sortField'])
-    return unless parameters[-1]['sortType'] == '-1'
-
-    @movies = @movies.reverse_order
+    return @movies = Movie.all if params[:field].nil? 
+    @movies = Movie.movie_scope(params[:field], params[:search])
   end
 
   def split_url(url)
