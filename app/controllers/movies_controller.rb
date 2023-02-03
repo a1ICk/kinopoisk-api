@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
 
   def show_filtered_movies
     @movies = Movie.all
-    url = request.original_url
+    url = request.original_url # re-do: Dima
     parameters = split_url(url)
       if url.split('movies').size != 1
         if url.count('&') > 2
