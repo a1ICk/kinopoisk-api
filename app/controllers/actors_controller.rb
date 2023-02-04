@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActorsController < ApplicationController
   before_action :set_actor, only: %i[show destroy update]
   def index
