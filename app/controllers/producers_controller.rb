@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProducersController < ApplicationController
   before_action only: %i[show create update destroy]
   def index
