@@ -3,5 +3,5 @@
 class Producer < ApplicationRecord
   belongs_to :team
   validates :name, presence: true
-  validates :experience, length: {in: 1..40}
+  validates_numericality_of :experience, greater_than_or_equal_to: 1, less_than_or_equal_to: 40
 end
