@@ -4,8 +4,6 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show update destroy]
   before_action :show_filtered_movies, only: :index
   
-  #before_action :set_movie, :show_filtered_movies, exept: :index  #only: %i[show destroy update]
-  
   def index
     render_json_movies(@movies)
   end
@@ -51,7 +49,7 @@ class MoviesController < ApplicationController
   end
 
   def show_filtered_movies
-    @movies = Movie.movie_scope(params[:field], params[:search]);
+    @movies = Movie.movie_scope(params[:field], params[:search])
   end
 
   def split_url(url)

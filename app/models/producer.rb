@@ -2,6 +2,7 @@
 
 class Producer < ApplicationRecord
   belongs_to :team
+
   validates :name, presence: true
-  validates :experience, length: {in: 1..40}
+  validates :experience, presence: true
 end

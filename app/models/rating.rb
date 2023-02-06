@@ -2,6 +2,7 @@
 
 class Rating < ApplicationRecord
   belongs_to :movie
-  validates :kp, length: {in: 1..10}
-  validates :imdb, length: {in: 1..10}
+
+  validates :kp, presence: true
+  validates :imdb, presence: true
 end
