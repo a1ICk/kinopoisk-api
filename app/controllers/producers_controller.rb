@@ -30,13 +30,6 @@ class ProducersController < ApplicationController
     end
   end
 
-  def destroy
-    @producers = Producer.find(params[:id])
-    return unless @producers.destroy
-
-    render json: { message: 'Actor successfully deleted' }, status: :ok
-  end
-
   def render_json_producers(param)
     render json: param
   end
