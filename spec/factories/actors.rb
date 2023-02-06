@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :actor do
-    name { 'clown' }
-    count_of_films { 2 }
+  factory :actor, class: 'Actor' do
+    name { Faker::Name.name }
+    count_of_films { Faker::Number.between(from: 1, to: 50) }
     team_id { Team.first }
   end
 end

@@ -3,11 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  it 'has a valid factory' do
-    team = FactoryBot.build(:team)
-    expect(team.movie_id).to be Movie.first
+  before(:each) do
+    @movie = FactoryBot.create(:movie)
   end
-  it 'team belongs_to movie' do
-    should belong_to :movie
+
+  describe 'initialized in before(:each)' do
+    it 'Team has a valid factory' do
+      team = FactoryBot.build(:team, movie_id: @movie.id)
+      expect(team.valid?).to be true
+    end
+
+    it 'Team without movie_id' do
+      team = FactoryBot.build(:team, movie_id: nil)
+      expect(team.valid?).to be false
+    end
+
+    it 'Team belongs_to Movie' do
+      should belong_to :movie
+    end
   end
 end

@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Movie, type: :model do
-  it 'has a valid factory' do
+  it 'Movie has a valid factory' do
     movie = FactoryBot.build(:movie)
-    expect(movie.release_date).to be 2008
+    expect(movie.valid?).to be true
+  end
+  it 'Movie cannot create without title' do
+    movie = FactoryBot.build(:movie, title: nil)
+    expect(movie.valid?).to be false
   end
 end
