@@ -51,8 +51,6 @@ GEM
       activemodel (>= 4.1, < 7.1)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
-    activejob (7.0.4.1)
-      activesupport (= 7.0.4.1)
     activejob (7.0.4.2)
       activesupport (= 7.0.4.2)
       globalid (>= 0.3.6)

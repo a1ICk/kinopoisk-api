@@ -2,10 +2,15 @@
 
 class ProducersController < ApplicationController
   before_action only: %i[show create update destroy]
+
   def index
-    @producers = Producer.all
-    render_json_producers(@producers)
+    render json: Producer.all, each_serializer: ProducerSerializer
   end
+
+  def show
+    render json: @producer, each_serializer: ProducerSerializer
+  end
+
 
   def create
     @producers = Producer.new(producers_params)
