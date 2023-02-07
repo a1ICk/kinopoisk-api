@@ -13,7 +13,8 @@ class MoviesController < ApplicationController
   end
 
   def show
-    render_json_movies(@movie)
+    #render_json_movies(@movie)
+    render json: @movie, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
   def create
