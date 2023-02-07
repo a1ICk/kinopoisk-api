@@ -7,13 +7,10 @@ class MoviesController < ApplicationController
   # before_action :set_movie, :show_filtered_movies, exept: :index  #only: %i[show destroy update]
 
   def index
-    # binding.pry
-
     render json: Movie.all, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
   def show
-    #render_json_movies(@movie)
     render json: @movie, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
@@ -28,7 +25,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      render json: @movie
+      render json: @movie, each_serializer: MovieSerializer, include: []
     else
       render json: { errors: @movie.errors.full_messages }, status: :unprocessable_entity
     end
