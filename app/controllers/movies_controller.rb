@@ -39,7 +39,8 @@ class MoviesController < ApplicationController
   private
 
   def show_filtered_movies
-    # @movies = Movie.movie_scope(params[:field], params[:search])
+    @movies = Movie.all
+    @movies.movie_scope(params[:field], params[:search]) if params[:field].present?
   end
 
   def split_url(url) # убрать

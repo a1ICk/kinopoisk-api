@@ -3,13 +3,11 @@
 class ActorsController < ApplicationController
   before_action :set_actor, only: %i[show destroy update]
   def index
-    @actors = Actor.all
-
-    render json: @actors
+    render json: Actor.all, each_serializer: ActorSerializer
   end
 
   def show
-    render json: @actor
+    render json: @actor, each_serializer: ActorSerializer
   end
 
   def create
