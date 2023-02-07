@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
   has_one :rating
   has_one :team
+
   validates :release_date, presence: true
   validates :genre, presence: true
   validates :title, length: { in: 1..1000 }
