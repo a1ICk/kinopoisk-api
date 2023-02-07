@@ -14,6 +14,8 @@ gem 'rails', '~> 7.0.4'
 gem 'jwt', '~> 2.7'
 gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 
+gem 'active_model_serializers', '~> 0.10.2'
+
 group :development, :test do
   gem 'pry-byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
