@@ -43,22 +43,6 @@ class MoviesController < ApplicationController
     @movies.movie_scope(params[:field], params[:search]) if params[:field].present?
   end
 
-  def split_url(url) # убрать
-    splitted = url.split(%r{[/?&]})[4..]
-
-    result = []
-    i = 0
-    while i < splitted.size - 1
-      first_field = splitted[i].split('=')[0]
-      first_search = splitted[i].split('=')[1]
-      second_field = splitted[i + 1].split('=')[0]
-      second_search = splitted[i + 1].split('=')[1]
-      result << { first_field => first_search, second_field => second_search }
-      i += 2
-    end
-    result
-  end
-
   def movie_params
     params.require(:movie).permit(:release_date, :genre, :title, :description)
   end
