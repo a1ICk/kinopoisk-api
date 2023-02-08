@@ -13,9 +13,9 @@ class ActorsController < ApplicationController
   def create
     @actor = Actor.new(actor_params)
     if @actor.save
-      render :json => { message: "Actor successfully created" }, status: :ok
+      render :json => { message: "Actor successfully created" }, each_serializer: ActorSerializer, status: :ok
     else
-      render :json => { errors: @actor.errors.full_messages }, status: :unprocessable_entity
+      render :json => { errors: @actor.errors.full_messages }, each_serializer: ActorSerializer, status: :unprocessable_entity
     end
   end
 
@@ -23,14 +23,14 @@ class ActorsController < ApplicationController
     if @actor.update(actor_params)
       render json: @actor
     else
-      render :json => { errors: @actor.errors.full_messages }, status: :unprocessable_entity
+      render :json => { errors: @actor.errors.full_messages }, each_serializer: ActorSerializer, status: :unprocessable_entity
     end
   end
 
   def destroy
     @actor.destroy
 
-    render :json => { message: "Actor successfully deleted" }, status: :ok
+    render :json => { message: "Actor successfully deleted" }, each_serializer: ActorSerializer, status: :ok
   end
 
   private
