@@ -2,6 +2,8 @@ class User < ApplicationRecord
   require 'securerandom'
   has_secure_password
 
+  enum role: %i[user admin].freeze
+
   validates :email, presence: true
   validates :password, presence: true
 
