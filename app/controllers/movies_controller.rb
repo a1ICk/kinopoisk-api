@@ -36,6 +36,12 @@ class MoviesController < ApplicationController
     render json: { message: 'Movie successfully deleted' }, status: :ok
   end
 
+  def random
+    @mv = Movie.all
+    @movie = @mv[rand(0..@mv.length)]
+    render json: @movie, each_serializer: MovieSerializer, include:
+  end
+
   private
 
   def show_filtered_movies
