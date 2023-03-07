@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :ratings
   resources :users
   post 'auth/login', to: 'authentication#login'
+  get 'movie/random', to: 'movies#random'
 end
