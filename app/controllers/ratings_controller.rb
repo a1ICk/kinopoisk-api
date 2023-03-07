@@ -5,19 +5,19 @@ class RatingsController < ApplicationController
   def index
     authorize Rating
     @ratings = Rating.all
-    render json: @ratings
+    render json: @ratings, each_serializer: RatingSerializer
   end
 
   def show
     authorize @rating
-    render json: @rating
+    render json: @rating, each_serializer: RatingSerializer
   end
 
   def create
     @rating = Rating.new(rating_params)
     authorize @rating
     if @actor.save
-      render json: { message: 'Rating created' }, status: :created
+      render :json => {message: "Rating created"}, status: :created, each_serializer: RatingSerializer
     else
       render json: { errors: @rating.errors.full_messages }, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class RatingsController < ApplicationController
   def update
     authorize @rating
     if @rating.update(rating_params)
-      render json: @rating
+      render json: @rating, each_serializer: RatingSerializer
     else
       render json: { errors: @rating.errors.full_messages }, status: :unprocessable_entity
     end
