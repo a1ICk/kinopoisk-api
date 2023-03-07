@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
 
   def random
     @mv = Movie.all
-    @movie = @mv[rand(0..@mv.length)]
+    @movie = @mv[rand(0..@mv.length-1)]
     render json: @movie, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
