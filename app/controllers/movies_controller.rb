@@ -7,15 +7,18 @@ class MoviesController < ApplicationController
   # before_action :set_movie, :show_filtered_movies, exept: :index  #only: %i[show destroy update]
 
   def index
+    authorize Movie
     render json: Movie.all, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
   def show
+    authorize @movie
     render json: @movie, each_serializer: MovieSerializer, include: ['team', 'rating', 'team.producer', 'team.actor']
   end
 
   def create
     @movie = Movie.new(movie_params)
+    authorize @movie
     if @movie.save
       render json: { message: 'Movie successfully created' }, status: :ok
     else
@@ -24,6 +27,7 @@ class MoviesController < ApplicationController
   end
 
   def update
+    authorize @movie
     if @movie.update(movie_params)
       render json: @movie, each_serializer: MovieSerializer, include: []
     else
@@ -32,6 +36,7 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    authorize @movie
     @movie.destroy
     render json: { message: 'Movie successfully deleted' }, status: :ok
   end

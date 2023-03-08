@@ -4,16 +4,18 @@ class ProducersController < ApplicationController
   before_action only: %i[show create update destroy]
 
   def index
+    authorize Producer
     render json: Producer.all, each_serializer: ProducerSerializer
   end
 
   def show
+    authorize @producer
     render json: @producer, each_serializer: ProducerSerializer
   end
 
-
   def create
     @producers = Producer.new(producers_params)
+    authorize @producer
     if @producers.save
       render json: { message: 'Producer successfully created' }, status: :ok
     else
@@ -21,22 +23,14 @@ class ProducersController < ApplicationController
     end
   end
 
-  def show
-    @producers = Producer.find(params[:id])
-    render_json_producers(@producers)
-  end
-
   def update
-    @producers = Producer.find(params[:id])
-    if @producers.update(producers_params)
-      render_json_producers(@producers)
+    @producer = Producer.find(params[:id])
+    authorize @producer
+    if @producer.update(producers_params)
+      render_json_producers(@producer)
     else
       render json: { errors: @actor.errors.full_messages }, status: :unprocessable_entity
     end
-  end
-
-  def render_json_producers(param)
-    render json: param
   end
 
   def producers_params

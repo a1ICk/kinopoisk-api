@@ -2,7 +2,12 @@
 
 class ApplicationController < ActionController::API
   include JsonWebToken
+  include Pundit
   before_action :authenticate_request
+
+  def current_user
+    @current_user
+  end
 
   private
 
